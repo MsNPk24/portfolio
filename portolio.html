@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tejas Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050505; 
+    color: white;
+    overflow-x: hidden;
+}
+
+/* --- Loader --- */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #050505;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loader h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.loader h1 .purple-text {
+    color: #a87ffb;
+}
+
+.loader-line {
+    width: 0%;
+    height: 3px;
+    background: #a87ffb;
+    animation: loadProgress 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes loadProgress {
+    0% { width: 0%; }
+    100% { width: 120%; } 
+}
+
+.hide-loader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* --- Slide Up Animation --- */
+.slide-up {
+    opacity: 0;
+    transform: translateY(60px); 
+    transition: opacity 1.4s ease, transform 1.4s cubic-bezier(0.22, 1, 0.36, 1); 
+}
+
+.slide-up.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Main Layout --- */
+.container {
+    max-width: 1100px; 
+    margin: auto;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* --- Premium Typography --- */
+.hero-title {
+    margin-top: 50px;
+    font-size: 5.5rem; 
+    font-weight: 900;
+    line-height: 1.15; 
+    letter-spacing: -0.5px; 
+    color: #ffffff;
+}
+
+.text-blue {
+    color: #00a8ff; 
+}
+
+/* --- Video Section --- */
+.video-box {
+    margin-top: 60px;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9; 
+    width: 100%;
+    position: relative;
+    background: #111;
+}
+
+.video-box iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #0f0f0f; /* Khali video box ka black background */
+    border: none;
+}
+
+.logo {
+    width: 160px; 
+    height: 160px;
+    object-fit: contain;
+    margin: 60px auto 20px;
+    display: block;
+    border-radius: 50%; 
+    transition: 0.3s;
+}
+
+.logo:hover {
+    transform: rotate(5deg) scale(1.05);
+}
+
+.tagline {
+    font-size: 3rem; 
+    font-weight: 800;
+    margin-top: 15px;
+    color: #ffffff;
+    letter-spacing: 0px;
+}
+
+/* --- 3D 'Work With Me' Button --- */
+.btn-3d {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 22px 60px;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, #11a8fd 0%, #0066cc 100%);
+    color: #ffffff;
+    font-size: 1.8rem; 
+    font-weight: 900;
+    text-transform: uppercase; 
+    text-decoration: none;
+    letter-spacing: 1px;
+    box-shadow: 0px 8px 0px #004c99, 0px 15px 30px rgba(0, 168, 255, 0.3);
+    text-shadow: 2px 3px 0px rgba(0,0,0,0.3);
+    transition: all 0.1s ease; 
+}
+
+.btn-3d:active {
+    transform: translateY(8px);
+    box-shadow: 0px 0px 0px #004c99, 0px 5px 15px rgba(0, 168, 255, 0.3);
+}
+
+.btn-3d:hover {
+    filter: brightness(1.1);
+}
+
+/* --- Sample Grid --- */
+.samples {
+    margin-top: 140px;
+}
+
+.samples h2 {
+    font-size: 3.5rem; 
+    font-weight: 900;
+    margin-bottom: 50px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.grid iframe {
+    width: 100%;
+    height: 240px; 
+    border-radius: 15px;
+    border: none;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    background: #0f0f0f; /* Khali hone par black block dikhega */
+}
+
+.grid iframe:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 168, 255, 0.3);
+    z-index: 10;
+}
+
+/* --- Contact Section --- */
+.contact {
+    margin-top: 140px;
+    padding-bottom: 100px;
+}
+
+.contact h2 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 45px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+/* --- Contact Buttons --- */
+.contact-btn {
+    text-decoration: none;
+    color: white;
+    padding: 16px 45px; 
+    border-radius: 12px; 
+    background: #304ffe; 
+    font-weight: 800;
+    font-size: 1.5rem; 
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s ease;
+}
+
+.contact-btn svg {
+    width: 26px;
+    height: 26px;
+    fill: currentColor;
+}
+
+.contact-btn:hover {
+    transform: translateY(-5px);
+    background: #2540d6; 
+    box-shadow: 0 10px 25px rgba(48, 79, 254, 0.4);
+}
+
+/* --- Mobile Responsive Adjustments --- */
+@media(max-width: 768px) {
+    .container { padding: 40px 15px; }
+    
+    .hero-title { font-size: 3.2rem; margin-top: 30px; line-height: 1.2; }
+    .tagline { font-size: 2rem; }
+    
+    .btn-3d { font-size: 1.4rem; padding: 18px 40px; }
+    
+    .samples h2, .contact h2 { font-size: 2.8rem; }
+
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .grid iframe { height: 160px; }
+
+    .logo { width: 120px; height: 120px; }
+}
+
+@media(max-width: 480px) {
+    .hero-title { font-size: 2.5rem; }
+    .tagline { font-size: 1.6rem; }
+    .grid { grid-template-columns: 1fr; } 
+    .grid iframe { height: 220px; }
+    
+    .buttons { flex-direction: column; width: 100%; }
+    .contact-btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader">
+    <div class="loader-content">
+        <h1><span>Te</span><span class="purple-text">jas</span></h1>
+        <div class="loader-line"></div>
+    </div>
+</div>
+
+<div class="container">
+
+    <h1 class="hero-title slide-up" style="transition-delay: 0.1s;">
+        <span class="text-blue">Editing</span> visuals that<br>
+        <span class="text-blue">feel alive....</span>
+    </h1>
+
+    <div class="video-box slide-up" style="transition-delay: 0.3s;">
+        <iframe class="smart-yt" data-link="https://youtu.be/cfa2nrnIgxo" title="Portfolio Showreel" allowfullscreen></iframe>
+    </div>
+
+    <img src="MsNPk.png" class="logo slide-up" alt="Tejas Logo" style="transition-delay: 0.5s;">
+
+    <h2 class="tagline slide-up" style="transition-delay: 0.6s;">
+        I Don't Just Edit, I Craft <span class="text-blue">Stories...</span>
+    </h2>
+
+    <a href="#contact" class="btn-3d slide-up" style="transition-delay: 0.7s;">Work With Me!</a>
+
+    <section class="samples">
+        <h2 class="slide-up">More <span class="text-blue">Samples...</span></h2>
+
+        <div class="grid">
+            <iframe class="slide-up smart-yt" data-link="https://youtu.be/SnT5cOzMRkA?si=C9l2xtH_4Ufk2pv8" title="Sample 1" allowfullscreen></iframe>
+            
+            <iframe class="slide-up smart-yt" style="transition-delay: 0.1s;" data-link="https://youtu.be/Dm6mS-R_DHU?si=MIaJrnJQkszUXaZP" title="Sample 2" allowfullscreen></iframe>
+            
+            <iframe class="slide-up smart-yt" style="transition-delay: 0.2s;" data-link="https://youtu.be/dRH1tTUM2fI?si=gz6fXa4n2JquZOph" title="Sample 3" allowfullscreen></iframe>
+            
+            <iframe class="slide-up smart-yt" data-link="https://youtu.be/3c5-aSZTEuE?si=z54_HdfU9COLzMlM
+
+" title="Sample 4" allowfullscreen></iframe>
+            
+            <iframe class="slide-up smart-yt" style="transition-delay: 0.1s;" data-link="https://youtu.be/-lLDMErvDgk?si=6gPb3Qtvj-Ndyjwq" title="Sample 5" allowfullscreen></iframe>
+            
+            <iframe class="slide-up smart-yt" style="transition-delay: 0.2s;" data-link="https://youtu.be/O3Aptc0pCLM?si=r9fv4w1mj9xgk6ak" title="Sample 6" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="slide-up">
+            Ready to <span class="text-blue">level up</span> your content?
+        </h2>
+
+        <div class="buttons slide-up" style="transition-delay: 0.2s;">
+            <a href="https://x.com/tejasflow_" target="_blank" class="contact-btn">
+                <svg viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                Twitter
+            </a>
+            <a href="https://www.instagram.com/tejasraj.edits/" target="_blank" class="contact-btn">
+                <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                Instagram
+            </a>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            document.getElementById("loader").classList.add("hide-loader");
+            setupScrollAnimations();
+            convertSmartYouTubeLinks(); // Naya JS Converter Run Kiya
+        }, 1600); 
+    });
+
+    function setupScrollAnimations() {
+        const slideElements = document.querySelectorAll('.slide-up');
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        slideElements.forEach(el => observer.observe(el));
+    }
+
+    // NAYA SMART LINK CONVERTER (Jo aapke 'youtu.be' ko automatically play hone layk banayega)
+    function convertSmartYouTubeLinks() {
+        document.querySelectorAll('.smart-yt').forEach(iframe => {
+            const link = iframe.getAttribute('data-link');
+            if (link && link.trim() !== "") {
+                let videoId = "";
+                // Agar link mein youtu.be hai
+                if (link.includes("youtu.be/")) {
+                    videoId = link.split("youtu.be/")[1].split("?")[0];
+                } 
+                // Agar link mein watch?v= hai
+                else if (link.includes("watch?v=")) {
+                    videoId = link.split("watch?v=")[1].split("&")[0];
+                } 
+                // Agar link mein shorts/ hai
+                else if (link.includes("shorts/")) {
+                    videoId = link.split("shorts/")[1].split("?")[0];
+                }
+
+                // Agar ID mil gayi toh properly set kardo
+                if (videoId) {
+                    iframe.src = "https://www.youtube.com/embed/" + videoId;
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
