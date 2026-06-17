@@ -1,0 +1,1097 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tejas </title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Montserrat',sans-serif;
+    cursor:none;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050505;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* PREMIUM NOISE */
+
+.noise{
+    position:fixed;
+    inset:0;
+
+    opacity:0.05;
+
+    background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+
+    pointer-events:none;
+
+    z-index:9999;
+}
+
+/* DOT BACKGROUND */
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+
+    background-image:
+    radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px);
+
+    background-size:24px 24px;
+
+    opacity:0.12;
+
+    z-index:-2;
+}
+
+body::after{
+    content:'';
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at 20% 20%, rgba(168,85,247,0.08), transparent 20%),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.04), transparent 20%);
+
+    z-index:-1;
+}
+
+/* LOADER */
+
+.loader{
+    position:fixed;
+    inset:0;
+
+    background:#050505;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    z-index:999999;
+}
+
+.loader h1{
+    font-size:70px;
+    font-weight:700;
+    letter-spacing:-3px;
+}
+
+.loader span{
+    color:#c084fc;
+}
+
+.loader-line{
+    width:220px;
+    height:2px;
+
+    margin-top:30px;
+
+    background:rgba(255,255,255,0.08);
+
+    overflow:hidden;
+
+    border-radius:10px;
+}
+
+.loader-fill{
+    width:0%;
+    height:100%;
+
+    background:#c084fc;
+
+    animation:loading 2s ease forwards;
+}
+
+@keyframes loading{
+    to{
+        width:100%;
+    }
+}
+
+/* CURSOR */
+
+.cursor{
+    position:fixed;
+
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(10px);
+
+    display:flex;
+    align-items:center;
+    justify-content:cenr;
+
+    pointer-events:none;
+
+    z-index:999999;
+
+    transform:translate(-50%,-50%);
+
+    transition:0.15s ease;
+}
+
+.cursor::before{
+    content:'✨';
+    font-size:16px;
+}
+
+.cursor.active{
+    transform:translate(-50%,-50%) scale(1.4);
+
+    background:rgba(168,85,247,0.18);
+
+    border:1px solid rgba(168,85,247,0.4);
+
+    box-shadow:0 0 35px rgba(168,85,247,0.45);
+}
+
+.cursor.active::before{
+    content:'💎';
+}
+
+/* MOUSE LIGHT */
+
+.mouse-light{
+    position:fixed;
+
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(168,85,247,0.16),
+    transparent 70%);
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    transform:translate(-50%,-50%);
+}
+
+/* NAVBAR */
+
+.navbar{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:82%;
+
+    padding:15px 25px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border-radius:60px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(20px);
+
+    z-index:1000;
+
+    transition:0.4s ease;
+}
+
+.navbar.scrolled{
+    width:74%;
+    background:rgba(10,10,10,0.78);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.logo h2{
+    font-size:18px;
+    font-weight:600;
+}
+
+.nav-links{
+    display:flex;
+    gap:40px;
+}
+
+.nav-links a{
+    color:#d7d7d7;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+/* HERO */
+
+.hero{
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:0 8%;
+}
+
+.hero-content{
+    max-width:1000px;
+}
+
+.hero-content h1{
+    font-size:110px;
+    line-height:1;
+    letter-spacing:-5px;
+    margin-bottom:30px;
+}
+
+.hero-content span{
+    color:#c084fc;
+}
+
+.hero-content p{
+    font-size:24px;
+    color:#d4d4d4;
+    line-height:1.8;
+}
+
+/* NEW CENTER BUTTON */
+
+.middle-cta{
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-top:-70px;
+    margin-bottom:120px;
+}
+
+/* PREMIUM BUTTONS */
+
+.work-btn,
+.contact-btn{
+
+    position:relative;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:0px;
+
+    padding:22px 55px;
+
+    border-radius:100px;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:800;
+
+    background:
+    linear-gradient(
+    135deg,
+    #ee6aff,
+    #a319ff);
+
+    border:none;
+
+    overflow:hidden;
+
+    transition:0.45s ease;
+
+    box-shadow:
+    0 16px 100px #c850ff59,
+    0 0 55px rgba(108, 57, 138, 0.18);
+}
+
+.work-btn::before,
+.contact-btn::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:180%;
+    height:180%;
+
+    background:
+    linear-gradient(
+    90deg,
+    transparent,
+    rgba(194, 130, 255, 0.25),
+    transparent);
+
+    top:-40%;
+    left:-140%;
+
+    transform:rotate(25deg);
+
+    animation:shineMove 4s linear infinite;
+}
+
+@keyframes shineMove{
+
+    100%{
+        left:160%;
+    }
+
+}
+
+.work-btn:hover,
+.contact-btn:hover{
+
+    transform:
+    translateY(-10px)
+    scale(1.08);
+
+    box-shadow:
+    0 22px 60px #db5cf580,
+    0 0 130px rgba(123, 61, 165, 0.25);
+}
+
+/* FLOATING GLASS */
+
+.glass-orb{
+    position:absolute;
+
+    width:200px;
+    height:200px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.04);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(20px);
+}
+
+.orb1{
+    top:20%;
+    left:10%;
+
+    animation:float1 6s ease-in-out infinite;
+}
+
+.orb2{
+    bottom:10%;
+    right:10%;
+
+    width:300px;
+    height:300px;
+
+    animation:float2 7s ease-in-out infinite;
+}
+
+@keyframes float1{
+    50%{
+        transform:translateY(-30px);
+    }
+}
+
+@keyframes float2{
+    50%{
+        transform:translateY(30px);
+    }
+}
+
+/* SECTIONS */
+
+section{
+    padding:120px 8%;
+}
+
+.title{
+    text-align:center;
+    font-size:62px;
+    margin-bottom:70px;
+    letter-spacing:-3px;
+}
+
+.title span{
+    color:#c084fc;
+}
+
+/* VIDEO GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.card{
+    position:relative;
+
+    border-radius:34px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    background:rgba(255,255,255,0.03);
+
+    transition:0.5s ease;
+}
+
+.card:hover{
+    transform:translateY(-12px) scale(1.02);
+}
+
+.card::before{
+    content:'';
+
+    position:absolute;
+
+    width:150%;
+    height:150%;
+
+    background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.08),
+    transparent);
+
+    left:-150%;
+    top:-30%;
+
+    transform:rotate(20deg);
+
+    transition:0.8s;
+}
+
+.card:hover::before{
+    left:120%;
+}
+
+.card video{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+/* TEXT BLOCK */
+
+.text-block{
+    max-width:1100px;
+    margin:auto;
+    text-align:center;
+}
+
+.text-block h2{
+    font-size:90px;
+    line-height:1;
+    letter-spacing:-4px;
+    margin-bottom:30px;
+}
+
+.text-block h2 span{
+    color:#c084fc;
+}
+
+.text-block p{
+    font-size:22px;
+    color:#d3d3d3;
+    line-height:2;
+}
+
+/* FAQ */
+
+.faq{
+    max-width:1000px;
+    margin:auto;
+}
+
+.faq-item{
+    margin-bottom:24px;
+
+    background:rgba(255,255,255,0.04);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    padding:30px;
+
+    border-radius:26px;
+
+    transition:0.4s;
+}
+
+.faq-item:hover{
+    transform:translateY(-8px);
+
+    background:rgba(255,255,255,0.06);
+}
+
+.faq-item h3{
+    margin-bottom:12px;
+    font-size:25px;
+}
+
+.faq-item p{
+    color:#cfcfcf;
+    line-height:1.8;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.stat{
+    padding:50px;
+
+    text-align:center;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,0.04);
+
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.stat h1{
+    font-size:70px;
+    color:#c084fc;
+}
+
+.stat p{
+    margin-top:10px;
+    color:#d4d4d4;
+}
+
+/* CONTACT */
+
+.contact{
+    text-align:center;
+}
+
+.contact h1{
+    font-size:70px;
+    margin-bottom:40px;
+}
+
+.contact-buttons{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+/* FOOTER */
+
+.footer{
+    padding-bottom:140px;
+    text-align:center;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .hero-content h1{
+        font-size:70px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-content h1{
+        font-size:52px;
+    }
+
+    .title{
+        font-size:42px;
+    }
+
+    .text-block h2{
+        font-size:52px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="noise"></div>
+
+<div class="loader">
+
+    <h1>Te<span>jas</span></h1>
+
+    <div class="loader-line">
+        <div class="loader-fill"></div>
+    </div>
+
+</div>
+
+<div class="cursor"></div>
+<div class="mouse-light"></div>
+
+<div class="glass-orb orb1"></div>
+<div class="glass-orb orb2"></div>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+
+        <img src="MsNPk.jpeg">
+
+        <h2>Tejas</h2>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="#videos">Videos</a>
+        <a href="#reels">Reels</a>
+        <a href="#faq">Faq</a>
+
+    </div>
+
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Editing visuals <br>
+            that feel <span>alive</span>
+        </h1>
+
+        <p>
+            Cinematic storytelling with smooth transitions,
+            premium sound design and scroll stopping visuals.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- NEW BUTTON -->
+
+<section class="middle-cta">
+
+    <a href="#" class="work-btn">
+        ✦ Work with me
+    </a>
+
+</section>
+
+<!-- LONG VIDEOS -->
+
+<section id="videos">
+
+    <h1 class="title">
+        Cinematic <span>frames</span>
+    </h1>
+
+    <div class="grid">
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="video1.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="video2.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="video3.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="video4.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="video5.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="video6.mp4">
+            </video>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- TEXT -->
+
+<section>
+
+    <div class="text-block">
+
+        <h2>
+            More than edits. <br>
+            <span>Pure visual energy.</span>
+        </h2>
+
+        <p>
+            Every project is built with cinematic pacing,
+            emotional transitions and premium visuals designed
+            to keep audiences watching longer.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- REELS -->
+
+<section id="reels">
+
+    <h1 class="title">
+        Viral <span>visuals</span>
+    </h1>
+
+    <div class="grid">
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="reel1.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="reel2.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="reel3.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="reel4.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="reel5.mp4">
+            </video>
+        </div>
+
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="reel6.mp4">
+            </video>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- STATS -->
+
+<section>
+
+    <div class="stats">
+
+        <div class="stat">
+            <h1>50+</h1>
+            <p>Projects Edited</p>
+        </div>
+
+        <div class="stat">
+            <h1>10M+</h1>
+            <p>Total Views</p>
+        </div>
+
+        <div class="stat">
+            <h1>24H</h1>
+            <p>Fast Delivery</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FAQ -->
+
+<section id="faq">
+
+    <h1 class="title">
+        Questions & <span>answers</span>
+    </h1>
+
+    <div class="faq">
+
+        <div class="faq-item">
+            <h3>How fast do you deliver?</h3>
+            <p>
+                Most edits are completed within 24–72 hours depending on complexity.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Do you edit cinematic content?</h3>
+            <p>
+                Yes. Cinematic transitions, sound design and premium grading are included.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can you edit reels and YouTube videos?</h3>
+            <p>
+                Yes. I edit reels, shorts, montages and long form cinematic videos.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact">
+
+    <h1>
+        Let's create something insane
+    </h1>
+
+    <div class="contact-buttons">
+
+        <a href="https://instagram.com/" class="contact-btn">
+            Instagram
+        </a>
+
+        <a href="https://x.com/" class="contact-btn">
+            X / Twitter
+        </a>
+
+    </div>
+
+</section>
+
+<script>
+
+/* REMOVE LOADER */
+
+window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+
+        document.querySelector(".loader").style.display="none";
+
+    },2200);
+
+});
+
+/* CURSOR */
+
+const cursor = document.querySelector(".cursor");
+const mouseLight = document.querySelector(".mouse-light");
+
+document.addEventListener("mousemove",(e)=>{
+
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+
+    mouseLight.style.left = e.clientX + "px";
+    mouseLight.style.top = e.clientY + "px";
+
+});
+
+/* ACTIVE CURSOR */
+
+document.querySelectorAll("a,.card,.faq-item").forEach(item=>{
+
+    item.addEventListener("mouseenter",()=>{
+
+        cursor.classList.add("active");
+
+    });
+
+    item.addEventListener("mouseleave",()=>{
+
+        cursor.classList.remove("active");
+
+    });
+
+});
+
+/* NAVBAR SCROLL */
+
+window.addEventListener("scroll",()=>{
+
+    const nav = document.querySelector(".navbar");
+
+    if(window.scrollY > 50){
+
+        nav.classList.add("scrolled");
+
+    }else{
+
+        nav.classList.remove("scrolled");
+
+    }
+
+});
+
+/* GSAP */
+
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.utils.toArray(".card").forEach((card,i)=>{
+
+    gsap.from(card,{
+        opacity:0,
+        y:120,
+        duration:1,
+        delay:i * 0.05,
+        scrollTrigger:{
+            trigger:card,
+            start:"top 85%"
+        }
+    });
+
+});
+
+gsap.from(".text-block",{
+    opacity:0,
+    y:120,
+    duration:1.2,
+    scrollTrigger:{
+        trigger:".text-block",
+        start:"top 80%"
+    }
+});
+
+gsap.utils.toArray(".faq-item").forEach((faq,i)=>{
+
+    gsap.from(faq,{
+        opacity:0,
+        y:100,
+        duration:1,
+        delay:i * 0.08,
+        scrollTrigger:{
+            trigger:faq,
+            start:"top 85%"
+        }
+    });
+
+});
+
+/* MAGNETIC BUTTON */
+
+document.querySelectorAll(".contact-btn,.work-btn").forEach(btn=>{
+
+    btn.addEventListener("mousemove",(e)=>{
+
+        const rect = btn.getBoundingClientRect();
+
+        const x = e.clientX - rect.left - rect.width/2;
+        const y = e.clientY - rect.top - rect.height/2;
+
+        btn.style.transform =
+        `translate(${x*0.15}px,${y*0.15}px) scale(1.08)`;
+
+    });
+
+    btn.addEventListener("mouseleave",()=>{
+
+        btn.style.transform = "";
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
